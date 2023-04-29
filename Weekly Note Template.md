@@ -1,58 +1,41 @@
 ---
-<% tp.file.include("[[Frontmatter Template]]") %>
- - "#calendar/weekly/<% tp.date.now('YYYY') %>"
-
+tags:
+- "#calendar/weekly/<% tp.date.now('YYYY') %>"
 banner: "![[<% tp.date.now('YYYY MMMM') %> Weekly Banner.jpg]]"
 banner_icon: 🗓️
 ---
+<%*
+title = '{{title}}'
+title = title.split('-')
+y = title[0]
+w = parseInt(title[1].slice(1))
+simple = new Date(y, 0, 1 + (w - 1) * 7);
+dow = simple.getDay();
+ISOweekStart = simple;
+if (dow <= 4)
+    ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1);
+else
+    ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay());
+WeekStart = `${('0'+ISOweekStart.getDate()).slice(-2)}-${('0'+(ISOweekStart.getMonth()+1)).slice(-2)}-${ISOweekStart.getFullYear()}`
+%>
 
-# <% tp.date.now("YYYY-MM [Week] WW") %>
+# {{title}}
 
-[[<% tp.date.now("YYYY [Week] WW", -7) %>|↶ Previous Week]] | [[<% tp.date.now("YYYY [Week] WW", 7) %>|Following Week ↷]]
-
-> [!METADATA]-
-> Created:: [[<% tp.date.now('YYYY-MM-DD') %>]] <% tp.date.now('HH:mm') %>
-> Updated:: <% tp.date.now('YYYY-MM-DD HH:mm') %>
-> ID:: <% tp.date.now('YYYYMMDDHHmmss') %>
-
-**Table of Contents:**
-```toc
-style: number
-```
-
-___
-
-## Memos
-- [[<% tp.date.weekday("YYYY-MM-DD", 0) %>|Monday]]
-	![[<% tp.date.weekday("YYYY-MM-DD", 0) %>#^memo-link]]
-- [[<% tp.date.weekday("YYYY-MM-DD", 1) %>|Tuesday]]
-	![[<% tp.date.weekday("YYYY-MM-DD", 1) %>#^memo-link]]
-- [[<% tp.date.weekday("YYYY-MM-DD", 2) %>|Wednesday]]
-	![[<% tp.date.weekday("YYYY-MM-DD", 2) %>#^memo-link]]
-- [[<% tp.date.weekday("YYYY-MM-DD", 3) %>|Thursday]]
-	![[<% tp.date.weekday("YYYY-MM-DD", 3) %>#^memo-link]]
-- [[<% tp.date.weekday("YYYY-MM-DD", 4) %>|Friday]]
-	![[<% tp.date.weekday("YYYY-MM-DD", 4) %>#^memo-link]]
-- [[<% tp.date.weekday("YYYY-MM-DD", 5) %>|Saturday]]
-	![[<% tp.date.weekday("YYYY-MM-DD", 5) %>#^memo-link]]
-- [[<% tp.date.weekday("YYYY-MM-DD", 6) %>|Sunday]]
-	![[<% tp.date.weekday("YYYY-MM-DD", 6) %>#^memo-link]]
-
-## Work Log
-- [[<% tp.date.weekday("YYYY-MM-DD", 0) %>|Monday]]
-	![[<% tp.date.weekday("YYYY-MM-DD", 0) %>#^work-link]]
-- [[<% tp.date.weekday("YYYY-MM-DD", 1) %>|Tuesday]]
-	![[<% tp.date.weekday("YYYY-MM-DD", 1) %>#^work-link]]
-- [[<% tp.date.weekday("YYYY-MM-DD", 2) %>|Wednesday]]
-	![[<% tp.date.weekday("YYYY-MM-DD", 2) %>#^work-link]]
-- [[<% tp.date.weekday("YYYY-MM-DD", 3) %>|Thursday]]
-	![[<% tp.date.weekday("YYYY-MM-DD", 3) %>#^work-link]]
-- [[<% tp.date.weekday("YYYY-MM-DD", 4) %>|Friday]]
-	![[<% tp.date.weekday("YYYY-MM-DD", 4) %>#^work-link]]
-- [[<% tp.date.weekday("YYYY-MM-DD", 5) %>|Saturday]]
-	![[<% tp.date.weekday("YYYY-MM-DD", 5) %>#^work-link]]
-- [[<% tp.date.weekday("YYYY-MM-DD", 6) %>|Sunday]]
-	![[<% tp.date.weekday("YYYY-MM-DD", 6) %>#^work-link]] 
+# Work Log
+- [[EverydayNotes/Days/<% tp.date.weekday("DD-MM-YYYY", 0, WeekStart, "DD-MM-YYYY") %>|Monday]]
+	![[EverydayNotes/Days/<% tp.date.weekday("DD-MM-YYYY", 0, WeekStart, "DD-MM-YYYY") %>#^work-link]]
+- [[EverydayNotes/Days/<% tp.date.weekday("DD-MM-YYYY", 1, WeekStart, "DD-MM-YYYY") %>|Tuesday]]
+	![[EverydayNotes/Days/<% tp.date.weekday("DD-MM-YYYY", 1, WeekStart, "DD-MM-YYYY") %>#^work-link]]
+- [[EverydayNotes/Days/<% tp.date.weekday("DD-MM-YYYY", 2, WeekStart, "DD-MM-YYYY") %>|Wednesday]]
+	![[EverydayNotes/Days/<% tp.date.weekday("DD-MM-YYYY", 2, WeekStart, "DD-MM-YYYY") %>#^work-link]]
+- [[EverydayNotes/Days/<% tp.date.weekday("DD-MM-YYYY", 3, WeekStart, "DD-MM-YYYY") %>|Thursday]]
+	![[EverydayNotes/Days/<% tp.date.weekday("DD-MM-YYYY", 3, WeekStart, "DD-MM-YYYY") %>#^work-link]]
+- [[EverydayNotes/Days/<% tp.date.weekday("DD-MM-YYYY", 4, WeekStart, "DD-MM-YYYY") %>|Friday]]
+	![[EverydayNotes/Days/<% tp.date.weekday("DD-MM-YYYY", 4, WeekStart, "DD-MM-YYYY") %>#^work-link]]
+- [[EverydayNotes/Days/<% tp.date.weekday("DD-MM-YYYY", 5, WeekStart, "DD-MM-YYYY") %>|Saturday]]
+	![[EverydayNotes/Days/<% tp.date.weekday("DD-MM-YYYY", 5, WeekStart, "DD-MM-YYYY") %>#^work-link]]
+- [[EverydayNotes/Days/<% tp.date.weekday("DD-MM-YYYY", 6, WeekStart, "DD-MM-YYYY") %>|Sunday]]
+	![[EverydayNotes/Days/<% tp.date.weekday("DD-MM-YYYY", 6, WeekStart, "DD-MM-YYYY") %>#^work-link]]
 
 ## Overview
 ### Week Statistics
@@ -89,16 +72,17 @@ const attributes = {
 		average: 6
 	},
 };
-
-const date = "<% tp.date.now('YYYY-MM-DD') %>";
+const ws = "<% WeekStart %>"
+const date = "<% tp.date.now('DD-MM-YYYY') %>";
 
 customJS.DvCharts.renderWeeklyChart({
 	dv,
 	context: this,
-	daysPath: '02 Personal/02.01 Periodic Notes/<% tp.date.now("YYYY") %>/Daily/<%tp.date.now("MM MMMM")%>',
+	daysPath: 'EverydayNotes/Days',
 	attributes,
 	type: 'average',
-	date
+	date,
+	ws
 })
 ```
 
@@ -110,9 +94,9 @@ TABLE WITHOUT ID
 	panic AS "🌪️",
 	prayer AS "🕋",
 	steps AS "👣",
-	hours-worked AS "✏️"
-FROM "02 Personal/02.01 Periodic Notes"
-WHERE week = [[<% tp.date.now("YYYY [Week] WW") %>]]
+	kod AS "✏️"
+FROM "EverydayNotes/Days"
+WHERE icontains(week, this.file.name)
 SORT file.name ASC
 ```
 
@@ -128,8 +112,8 @@ TABLE WITHOUT ID
 	revision AS "🔁",
 	shower AS "🚿",
 	typing AS "⌨️"
-FROM "02 Personal/02.01 Periodic Notes"
-WHERE week = [[<% tp.date.now("YYYY [Week] WW") %>]]
+FROM "EverydayNotes/Days"
+WHERE icontains(week, this.file.name)
 SORT file.name ASC
 ```
 
@@ -137,7 +121,7 @@ SORT file.name ASC
 ```dataviewjs
 dv.table(
 	["Learnt Word", "Meaning"],
-	dv.pages('"02 Personal"')
+	dv.pages('"EverydayNotes/Days"')
 	.filter(p => p["Learnt Word"] && p.week.path == "<% tp.date.now("YYYY [Week] WW") %>")
 	.sort(p => dv.date(p.file.name), 'asc')
 	.flatMap(p =>
@@ -166,7 +150,15 @@ TABLE WITHOUT ID
 	wind-direction AS 🧭,
 	(wind-speed + " km h⁻¹") AS 🍃,
 	observed AS 🕓
-FROM "02 Personal/02.01 Periodic Notes"
-WHERE week = [[<% tp.date.now("YYYY [Week] WW") %>]]
+FROM "EverydayNotes/Days"
+WHERE icontains(week, this.file.name)
 SORT file.name ASC
 ```
+
+
+> [!METADATA]-
+> Created:: [[<% tp.date.now('DD-MM-YYYY') %>]] <% tp.date.now('HH:mm') %>
+> Updated:: <% tp.date.now('DD-MM-YYYY HH:mm') %>
+> ID:: <% tp.date.now('YYYYMMDDHHmmss') %>
+> TitleWeek:: <% '{{title}}' %>
+> WeekStart:: <% WeekStart %>
